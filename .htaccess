@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+Options +MultiViews
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/$ $1.html
+RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+RewriteRule (.*)$ /$1/ [R=301,L]
+
+RewriteBase /stylesl
+RewriteRule ^.*[-/]e(\d+)/?$ index\.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]e(\d+)[-/].*$ index\.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule ^e(\d+)[-/].*$ index\.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]e(\d+)-.*$ index\.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule ^e(\d+)-.*$ index\.php?id=$1&%{QUERY_STRING} [L]
+RewriteRule ^l(\d+)[-/].*[-/]e(\d+)-.*$ index\.php?id=$1-$2&%{QUERY_STRING} [L]
+RewriteRule ^l(\d+)[-/]e(\d+)[-/].*$ index\.php?id=$1-$2&%{QUERY_STRING} [L]
+RewriteRule ^e(\d+)[-/].*[-/]l(\d+)[-/].*$ index\.php?id=$2-$1&%{QUERY_STRING} [L]
+RewriteRule ^e(\d+)[-/]l(\d+)[-/].*$ index\.php?id=$2-$1&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]e(\d+)[-/]l(\d+)[-/].*$ index\.php?id=$2-$1&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]e(\d+)[-/].*[-/]l(\d+)[-/].*$ index\.php?id=$2-$1&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]l(\d+)[-/].*[-/]e(\d+)[-/].*$ index\.php?id=$1-$2&%{QUERY_STRING} [L]
+RewriteRule ^.*[-/]l(\d+)[-/]e(\d+)[-/].*$ index\.php?id=$1-$2&%{QUERY_STRING} [L]
+
+</IfModule>
